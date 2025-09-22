@@ -182,13 +182,15 @@ class OicSession < ActiveRecord::Base
 
   def authorization_url
     config = dynamic_config
-    config["authorization_endpoint"] + "?" + authorization_query.to_param
+    # config["authorization_endpoint"] + "?" + authorization_query.to_param
+    "https://sso.redrive.com.br/realms/redrive-tools/protocol/openid-connect/auth" + "?" + authorization_query.to_param
   end
 
   def end_session_url
     config = dynamic_config
     return if config["end_session_endpoint"].nil?
     config["end_session_endpoint"] + "?" + end_session_query.to_param
+    
   end
 
   def randomize_state!
